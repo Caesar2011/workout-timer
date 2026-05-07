@@ -1,7 +1,12 @@
-import { useAppContext } from "../../../contexts/useAppContext";
-import type { WorkoutConfig } from "../../../types";
-import { formatTime, formatTotalDuration, getTotalDuration } from "../../../logic/workout";
-import styles from "./HistoryList.module.css";
+import { useAppContext } from '../../../contexts/useAppContext';
+import type { WorkoutConfig } from '../../../types';
+import {
+  formatTime,
+  formatTotalDuration,
+  getTotalDuration,
+} from '../../../logic/workout';
+
+import styles from './HistoryList.module.css';
 
 interface Props {
   onSelect: (cfg: WorkoutConfig) => void;

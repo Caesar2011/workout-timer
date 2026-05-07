@@ -1,5 +1,6 @@
-import { useContext } from "preact/hooks";
-import { AppContext } from "./AppContext";
+import { useContext } from 'preact/hooks';
+
+import { AppContext } from './AppContext';
 
 export function useAppContext() {
   return useContext(AppContext);

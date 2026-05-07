@@ -1,10 +1,11 @@
-import { useAppContext } from "../../contexts/useAppContext";
-import { useWorkout } from "../../hooks/useWorkout";
-import type { WorkoutConfig } from "../../types";
-import { formatTime, getDonutSegments } from "../../logic/workout";
-import { DonutRing } from "./DonutRing/DonutRing";
-import { CountdownOverlay } from "./CountdownOverlay/CountdownOverlay";
-import styles from "./WorkoutScreen.module.css";
+import { useAppContext } from '../../contexts/useAppContext';
+import { useWorkout } from '../../hooks/useWorkout';
+import type { WorkoutConfig } from '../../types';
+import { formatTime, getDonutSegments } from '../../logic/workout';
+
+import { DonutRing } from './DonutRing/DonutRing';
+import { CountdownOverlay } from './CountdownOverlay/CountdownOverlay';
+import styles from './WorkoutScreen.module.css';
 
 interface Props {
   config: WorkoutConfig;
@@ -12,15 +13,18 @@ interface Props {
 
 export function WorkoutScreen({ config }: Props) {
   const { settings, returnToConfig } = useAppContext();
-  const { state, countdownRemaining } = useWorkout(config, settings.soundEnabled);
+  const { state, countdownRemaining } = useWorkout(
+    config,
+    settings.soundEnabled,
+  );
   const segments = getDonutSegments(config);
 
-  const isDone = state.phase === "done";
-  const isActive = state.phase === "active";
-  const phaseColor = isActive ? "var(--c-active)" : "var(--c-rest)";
+  const isDone = state.phase === 'done';
+  const isActive = state.phase === 'active';
+  const phaseColor = isActive ? 'var(--c-active)' : 'var(--c-rest)';
 
   const displayTotal =
-    settings.direction === "down"
+    settings.direction === 'down'
       ? state.totalDuration - state.totalElapsed
       : state.totalElapsed;
 
@@ -30,7 +34,10 @@ export function WorkoutScreen({ config }: Props) {
         <CountdownOverlay remaining={countdownRemaining} />
       )}
 
-      <button class={`pill-btn pill-btn--ghost ${styles.backBtn}`} onClick={returnToConfig}>
+      <button
+        class={`pill-btn pill-btn--ghost ${styles.backBtn}`}
+        onClick={returnToConfig}
+      >
         ← Back
       </button>
 

@@ -1,10 +1,14 @@
-import { useEffect, useRef, useState } from "preact/hooks";
-import { playActive, playCountdownBeep, playDone, playRest, playStart } from "../logic/sound";
+import { useEffect, useRef, useState } from 'preact/hooks';
+
 import {
-  buildInitialWorkoutState,
-  tick,
-} from "../logic/workout";
-import type { PhaseKind, WorkoutConfig, WorkoutState } from "../types";
+  playActive,
+  playCountdownBeep,
+  playDone,
+  playRest,
+  playStart,
+} from '../logic/sound';
+import { buildInitialWorkoutState, tick } from '../logic/workout';
+import type { PhaseKind, WorkoutConfig, WorkoutState } from '../types';
 
 interface UseWorkoutReturn {
   state: WorkoutState;
@@ -13,13 +17,13 @@ interface UseWorkoutReturn {
 
 export function useWorkout(
   config: WorkoutConfig,
-  soundEnabled: boolean
+  soundEnabled: boolean,
 ): UseWorkoutReturn {
   const [countdownRemaining, setCountdownRemaining] = useState<number | null>(
-    config.countdownSecs > 0 ? config.countdownSecs : null
+    config.countdownSecs > 0 ? config.countdownSecs : null,
   );
   const [state, setState] = useState<WorkoutState>(
-    buildInitialWorkoutState(config)
+    buildInitialWorkoutState(config),
   );
 
   const prevPhaseRef = useRef<PhaseKind | null>(null);
@@ -33,7 +37,7 @@ export function useWorkout(
       if (soundRef.current) playCountdownBeep();
       const id = setTimeout(
         () => setCountdownRemaining((n) => (n !== null ? n - 1 : null)),
-        1000
+        1000,
       );
       return () => clearTimeout(id);
     }
@@ -45,16 +49,16 @@ export function useWorkout(
 
   useEffect(() => {
     if (countdownRemaining !== null) return;
-    if (state.phase === "done") return;
+    if (state.phase === 'done') return;
 
     const id = setInterval(() => {
       setState((prev) => {
         const next = tick(prev, config);
 
         if (soundRef.current && next.phase !== prev.phase) {
-          if (next.phase === "active") playActive();
-          else if (next.phase === "rest") playRest();
-          else if (next.phase === "done") playDone();
+          if (next.phase === 'active') playActive();
+          else if (next.phase === 'rest') playRest();
+          else if (next.phase === 'done') playDone();
         }
 
         return next;

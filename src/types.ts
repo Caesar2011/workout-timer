@@ -1,6 +1,6 @@
-export type PhaseKind = "active" | "rest" | "countdown" | "done";
+export type PhaseKind = 'active' | 'rest' | 'countdown' | 'done';
 
-export type TimerDirection = "up" | "down";
+export type TimerDirection = 'up' | 'down';
 
 export interface WorkoutConfig {
   activeSecs: number;
@@ -33,7 +33,7 @@ export interface WorkoutState {
 }
 
 export interface DonutSegment {
-  kind: "active" | "rest";
+  kind: 'active' | 'rest';
   /** 0–360 degrees, start angle from top (12 o'clock) */
   startAngle: number;
   /** arc length in degrees */

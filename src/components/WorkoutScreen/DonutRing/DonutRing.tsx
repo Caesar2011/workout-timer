@@ -1,5 +1,6 @@
-import type { DonutSegment, PhaseKind } from "../../../types";
-import styles from "./DonutRing.module.css";
+import type { DonutSegment, PhaseKind } from '../../../types';
+
+import styles from './DonutRing.module.css';
 
 interface Props {
   segments: DonutSegment[];
@@ -20,7 +21,12 @@ function polarToXY(angleDeg: number, r: number): { x: number; y: number } {
   return { x: CX + r * Math.cos(rad), y: CY + r * Math.sin(rad) };
 }
 
-function arcPath(startAngle: number, sweepAngle: number, outerR: number, innerR: number): string {
+function arcPath(
+  startAngle: number,
+  sweepAngle: number,
+  outerR: number,
+  innerR: number,
+): string {
   // clamp to avoid degenerate arcs
   const sweep = Math.min(sweepAngle, 359.999);
   const largeArc = sweep > 180 ? 1 : 0;
@@ -36,8 +42,8 @@ function arcPath(startAngle: number, sweepAngle: number, outerR: number, innerR:
     `A ${outerR} ${outerR} 0 ${largeArc} 1 ${o2.x} ${o2.y}`,
     `L ${i1.x} ${i1.y}`,
     `A ${innerR} ${innerR} 0 ${largeArc} 0 ${i2.x} ${i2.y}`,
-    "Z",
-  ].join(" ");
+    'Z',
+  ].join(' ');
 }
 
 export function DonutRing({ segments, totalSecs, elapsedSecs, phase }: Props) {
@@ -53,10 +59,14 @@ export function DonutRing({ segments, totalSecs, elapsedSecs, phase }: Props) {
     >
       {segments.map((seg, i) => {
         const segEndAngle = seg.startAngle + seg.sweepAngle;
-        const color = seg.kind === "active" ? "var(--c-active)" : "var(--c-rest)";
+        const color =
+          seg.kind === 'active' ? 'var(--c-active)' : 'var(--c-rest)';
 
         // Portion of this segment that is elapsed (fully dark)
-        const elapsedInSeg = Math.max(0, Math.min(elapsedDeg - seg.startAngle, seg.sweepAngle));
+        const elapsedInSeg = Math.max(
+          0,
+          Math.min(elapsedDeg - seg.startAngle, seg.sweepAngle),
+        );
         // Portion remaining (colored)
         const remainingStart = seg.startAngle + elapsedInSeg;
         const remainingSweep = seg.sweepAngle - elapsedInSeg;
@@ -73,7 +83,7 @@ export function DonutRing({ segments, totalSecs, elapsedSecs, phase }: Props) {
               <path
                 d={arcPath(remainingStart, remainingSweep, OUTER_R, INNER_R)}
                 fill={color}
-                opacity={phase === "done" ? 0.3 : 1}
+                opacity={phase === 'done' ? 0.3 : 1}
               />
             )}
             {/* Segment divider gap — thin dark line at boundaries */}

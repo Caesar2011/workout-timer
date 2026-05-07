@@ -1,4 +1,4 @@
-import styles from "./CountdownOverlay.module.css";
+import styles from './CountdownOverlay.module.css';
 
 interface Props {
   remaining: number;
@@ -7,7 +7,7 @@ interface Props {
 export function CountdownOverlay({ remaining }: Props) {
   return (
     <div class={styles.overlay}>
-      <span class={styles.number}>{remaining === 0 ? "GO" : remaining}</span>
+      <span class={styles.number}>{remaining === 0 ? 'GO' : remaining}</span>
     </div>
   );
 }

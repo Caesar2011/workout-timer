@@ -1,9 +1,19 @@
-import { useState } from "preact/hooks";
-import { loadHistory, loadSettings, saveSettings, saveToHistory } from "../logic/storage";
-import type { AppSettings, WorkoutConfig } from "../types";
-import { AppContext } from "../contexts/AppContext";
+import { useState } from 'preact/hooks';
 
-export function AppProviders({ children }: { children: preact.ComponentChildren }) {
+import {
+  loadHistory,
+  loadSettings,
+  saveSettings,
+  saveToHistory,
+} from '../logic/storage';
+import type { AppSettings, WorkoutConfig } from '../types';
+import { AppContext } from '../contexts/AppContext';
+
+export function AppProviders({
+  children,
+}: {
+  children: preact.ComponentChildren;
+}) {
   const [settings, setSettings] = useState<AppSettings>(loadSettings);
   const [history, setHistory] = useState<WorkoutConfig[]>(loadHistory);
   const [activeConfig, setActiveConfig] = useState<WorkoutConfig | null>(null);
@@ -32,7 +42,15 @@ export function AppProviders({ children }: { children: preact.ComponentChildren 
 
   return (
     <AppContext.Provider
-      value={{ settings, updateSettings, history, addToHistory, activeConfig, startWorkout, returnToConfig }}
+      value={{
+        settings,
+        updateSettings,
+        history,
+        addToHistory,
+        activeConfig,
+        startWorkout,
+        returnToConfig,
+      }}
     >
       {children}
     </AppContext.Provider>

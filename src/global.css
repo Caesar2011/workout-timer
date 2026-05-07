@@ -13,7 +13,7 @@
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
-  --font-mono: "SF Mono", "Fira Code", "Consolas", monospace;
+  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
 }
 
 *,

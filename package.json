@@ -30,6 +30,7 @@
     "typescript": "^5.7.2",
     "vite": "^6.0.5",
     "vite-plugin-singlefile": "^2.0.2",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.0",
+    "jsdom": "^29.1.1"
   }
 }

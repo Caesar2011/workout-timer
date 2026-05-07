@@ -1,6 +1,7 @@
-import { createContext } from "preact";
-import { DEFAULT_SETTINGS } from "../config";
-import type { AppSettings, WorkoutConfig } from "../types";
+import { createContext } from 'preact';
+
+import { DEFAULT_SETTINGS } from '../config';
+import type { AppSettings, WorkoutConfig } from '../types';
 
 export interface AppContextValue {
   settings: AppSettings;

@@ -1,11 +1,13 @@
-import { useState } from "preact/hooks";
-import { useAppContext } from "../../contexts/useAppContext";
-import { getTotalDuration, formatTotalDuration } from "../../logic/workout";
-import type { WorkoutConfig } from "../../types";
-import { HistoryList } from "./HistoryList/HistoryList";
-import { SettingsPanel } from "./SettingsPanel/SettingsPanel";
-import { WorkoutForm } from "./WorkoutForm/WorkoutForm";
-import styles from "./ConfigScreen.module.css";
+import { useState } from 'preact/hooks';
+
+import { useAppContext } from '../../contexts/useAppContext';
+import { getTotalDuration, formatTotalDuration } from '../../logic/workout';
+import type { WorkoutConfig } from '../../types';
+
+import { HistoryList } from './HistoryList/HistoryList';
+import { SettingsPanel } from './SettingsPanel/SettingsPanel';
+import { WorkoutForm } from './WorkoutForm/WorkoutForm';
+import styles from './ConfigScreen.module.css';
 
 export function ConfigScreen() {
   const { settings, startWorkout } = useAppContext();
@@ -32,7 +34,14 @@ export function ConfigScreen() {
 
   const canStart = rounds > 0 && activeSecs > 0;
   const totalSecs = canStart
-    ? getTotalDuration({ activeSecs, restSecs, rounds, countdownSecs: 0, direction: "down", usedAt: "" })
+    ? getTotalDuration({
+        activeSecs,
+        restSecs,
+        rounds,
+        countdownSecs: 0,
+        direction: 'down',
+        usedAt: '',
+      })
     : 0;
 
   return (

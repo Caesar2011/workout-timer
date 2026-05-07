@@ -1,6 +1,8 @@
-import { useState } from "preact/hooks";
-import { Numpad } from "../../Numpad/Numpad";
-import styles from "./NumberInput.module.css";
+import { useState } from 'preact/hooks';
+
+import { Numpad } from '../../Numpad/Numpad';
+
+import styles from './NumberInput.module.css';
 
 interface Props {
   label: string;
@@ -10,14 +12,14 @@ interface Props {
   onChange: (v: number) => void;
 }
 
-export function NumberInput({ label, value, min, max, onChange }: Props) {
+export function NumberInput({ label, value, max, onChange }: Props) {
   const [open, setOpen] = useState(false);
 
   return (
     <div class={styles.wrapper}>
       <span class={styles.label}>{label}</span>
       <button
-        class={`${styles.field} ${open ? styles.focused : ""}`}
+        class={`${styles.field} ${open ? styles.focused : ''}`}
         onClick={() => setOpen((o) => !o)}
       >
         <span class={styles.value}>{value}</span>

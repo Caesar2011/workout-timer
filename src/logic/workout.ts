@@ -1,31 +1,39 @@
-import type { DonutSegment, WorkoutConfig, WorkoutState } from "../types";
+import type { DonutSegment, WorkoutConfig, WorkoutState } from '../types';
 
 export function getTotalDuration(config: WorkoutConfig): number {
   return (
-    config.rounds * config.activeSecs +
-    (config.rounds - 1) * config.restSecs
+    config.rounds * config.activeSecs + (config.rounds - 1) * config.restSecs
   );
 }
 
 /** Pure tick: advances state by one second. */
 export function tick(state: WorkoutState, config: WorkoutConfig): WorkoutState {
-  if (state.phase === "done" || state.phase === "countdown") return state;
+  if (state.phase === 'done' || state.phase === 'countdown') return state;
 
   const nextRemaining = state.phaseRemaining - 1;
   const nextElapsed = state.totalElapsed + 1;
 
   if (nextRemaining > 0) {
-    return { ...state, phaseRemaining: nextRemaining, totalElapsed: nextElapsed };
+    return {
+      ...state,
+      phaseRemaining: nextRemaining,
+      totalElapsed: nextElapsed,
+    };
   }
 
-  if (state.phase === "active") {
+  if (state.phase === 'active') {
     const isLastRound = state.round >= config.rounds;
     if (isLastRound) {
-      return { ...state, phase: "done", phaseRemaining: 0, totalElapsed: nextElapsed };
+      return {
+        ...state,
+        phase: 'done',
+        phaseRemaining: 0,
+        totalElapsed: nextElapsed,
+      };
     }
     return {
       ...state,
-      phase: "rest",
+      phase: 'rest',
       phaseRemaining: config.restSecs,
       totalElapsed: nextElapsed,
     };
@@ -33,7 +41,7 @@ export function tick(state: WorkoutState, config: WorkoutConfig): WorkoutState {
 
   return {
     ...state,
-    phase: "active",
+    phase: 'active',
     round: state.round + 1,
     phaseRemaining: config.activeSecs,
     totalElapsed: nextElapsed,
@@ -42,7 +50,7 @@ export function tick(state: WorkoutState, config: WorkoutConfig): WorkoutState {
 
 export function buildInitialWorkoutState(config: WorkoutConfig): WorkoutState {
   return {
-    phase: "active",
+    phase: 'active',
     round: 1,
     phaseRemaining: config.activeSecs,
     totalElapsed: 0,
@@ -59,12 +67,16 @@ export function getDonutSegments(config: WorkoutConfig): DonutSegment[] {
 
   for (let r = 1; r <= config.rounds; r++) {
     const activeSweep = (config.activeSecs / total) * 360;
-    segments.push({ kind: "active", startAngle: angle, sweepAngle: activeSweep });
+    segments.push({
+      kind: 'active',
+      startAngle: angle,
+      sweepAngle: activeSweep,
+    });
     angle += activeSweep;
 
     if (r < config.rounds) {
       const restSweep = (config.restSecs / total) * 360;
-      segments.push({ kind: "rest", startAngle: angle, sweepAngle: restSweep });
+      segments.push({ kind: 'rest', startAngle: angle, sweepAngle: restSweep });
       angle += restSweep;
     }
   }
@@ -75,12 +87,12 @@ export function getDonutSegments(config: WorkoutConfig): DonutSegment[] {
 export function formatTime(secs: number): string {
   const m = Math.floor(Math.abs(secs) / 60);
   const s = Math.abs(secs) % 60;
-  return `${m}:${s.toString().padStart(2, "0")}`;
+  return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
 /** Human-readable total duration, e.g. "12 min 30 sec" or "45 sec". */
 export function formatTotalDuration(secs: number): string {
-  if (secs <= 0) return "0 sec";
+  if (secs <= 0) return '0 sec';
   const m = Math.floor(secs / 60);
   const s = secs % 60;
   if (m === 0) return `${s} sec`;
