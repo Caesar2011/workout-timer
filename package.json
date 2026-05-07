@@ -27,6 +27,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.2",
+    "terser": "^5.36.0",
     "typescript": "^5.7.2",
     "vite": "^6.0.5",
     "vite-plugin-singlefile": "^2.0.2",
