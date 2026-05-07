@@ -1,0 +1,36 @@
+image:
+  repository: your-dockerhub-username/workout-timer
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: false
+  className: ""
+  host: workout-timer.local
+  tls:
+    enabled: false
+    secretName: workout-timer-tls
+  annotations: {}
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    cpu: 50m
+    memory: 32Mi
+
+podAnnotations: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
