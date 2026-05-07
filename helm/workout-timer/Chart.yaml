@@ -3,4 +3,4 @@ name: workout-timer
 description: Gym workout interval timer — single static HTML app
 type: application
 version: 0.1.0
-appVersion: "latest"
+appVersion: 'latest'
