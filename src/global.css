@@ -1,0 +1,81 @@
+:root {
+  --c-bg: #0a0a0a;
+  --c-surface: #141414;
+  --c-border: #2a2a2a;
+  --c-active: #22c55e;
+  --c-rest: #f97316;
+  --c-done-seg: #1c1c1c;
+  --c-text-primary: #ffffff;
+  --c-text-secondary: #888888;
+  --c-text-dim: #444444;
+  --c-btn-primary: #22c55e;
+  --c-btn-primary-text: #0a0a0a;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --font-mono: "SF Mono", "Fira Code", "Consolas", monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  background: var(--c-bg);
+  color: var(--c-text-primary);
+  font-family: system-ui, sans-serif;
+  overflow: hidden;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+
+.pill-btn:active {
+  opacity: 0.75;
+}
+
+.pill-btn--primary {
+  background: var(--c-btn-primary);
+  color: var(--c-btn-primary-text);
+}
+
+.pill-btn--ghost {
+  border: 1.5px solid var(--c-border);
+  color: var(--c-text-primary);
+}
+
+.pill-btn--active {
+  background: var(--c-active);
+  color: var(--c-btn-primary-text);
+  border-color: var(--c-active);
+}
+
+.pill-btn--rest {
+  background: var(--c-rest);
+  color: var(--c-btn-primary-text);
+  border-color: var(--c-rest);
+}

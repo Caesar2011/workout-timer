@@ -1,0 +1,10 @@
+node_modules/
+.github/
+.git/
+src/
+*.config.ts
+*.config.mjs
+tsconfig.json
+package*.json
+.prettierrc
+.gitignore

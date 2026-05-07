@@ -1,0 +1,22 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.number {
+  font-size: clamp(6rem, 20vmin, 14rem);
+  font-weight: 900;
+  font-family: var(--font-mono);
+  color: var(--c-text-primary);
+  animation: pop 0.25s ease-out;
+}
+
+@keyframes pop {
+  from { transform: scale(1.4); opacity: 0.5; }
+  to   { transform: scale(1);   opacity: 1; }
+}

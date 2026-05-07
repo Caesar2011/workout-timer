@@ -1,0 +1,65 @@
+.screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-bg);
+}
+
+.backBtn {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.backBtn:hover {
+  opacity: 1;
+}
+
+.center {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.labels {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  pointer-events: none;
+}
+
+.round {
+  font-size: 4vmin;
+  color: var(--c-text-secondary);
+  font-weight: 600;
+}
+
+.phaseTime {
+  font-size: 20vmin;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.totalTime {
+  font-size: 8vmin;
+  color: var(--c-text-secondary);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.doneText {
+  font-size: clamp(2.5rem, 8vmin, 6rem);
+  font-weight: 800;
+  color: var(--c-active);
+}

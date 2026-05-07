@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+  font-weight: 600;
+  color: var(--c-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.field {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.4rem, 1vh, 0.7rem) clamp(0.75rem, 2vw, 1.2rem);
+  background: var(--c-surface);
+  border: 2px solid var(--c-border);
+  border-radius: var(--radius-md);
+  min-width: clamp(70px, 10vw, 110px);
+  transition: border-color 0.15s;
+  color: var(--c-text-primary);
+}
+
+.focused {
+  border-color: var(--c-text-secondary);
+}
+
+.value {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 700;
+  font-family: var(--font-mono);
+}

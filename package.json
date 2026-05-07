@@ -1,0 +1,35 @@
+{
+  "name": "workout-timer",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "lint": "prettier --write . && eslint --fix",
+    "typecheck": "tsc --noEmit",
+    "rerender": "npm run lint && npm run typecheck && npm run build"
+  },
+  "dependencies": {
+    "preact": "^10.29.1"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.5",
+    "@eslint/compat": "^2.0.3",
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^10.0.1",
+    "prettier": "^3.8.1",
+    "@typescript-eslint/eslint-plugin": "^8.57.1",
+    "@typescript-eslint/parser": "^8.57.1",
+    "eslint": "^10.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import-x": "^4.16.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5",
+    "vite-plugin-singlefile": "^2.0.2",
+    "vitest": "^4.1.0"
+  }
+}

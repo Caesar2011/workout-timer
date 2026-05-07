@@ -1,0 +1,74 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.heading {
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  font-weight: 600;
+  color: var(--c-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.empty {
+  font-size: 0.9rem;
+  color: var(--c-text-dim);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.75rem 0.9rem;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.item:hover {
+  border-color: var(--c-text-secondary);
+}
+
+.times {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  font-family: var(--font-mono);
+}
+
+.active {
+  color: var(--c-active);
+  font-weight: 700;
+}
+
+.sep {
+  color: var(--c-text-dim);
+}
+
+.rest {
+  color: var(--c-rest);
+  font-weight: 700;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rounds {
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+  color: var(--c-text-secondary);
+}
+
+.total {
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+  color: var(--c-text-dim);
+}
