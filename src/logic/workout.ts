@@ -90,12 +90,9 @@ export function formatTime(secs: number): string {
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
-/** Human-readable total duration, e.g. "12 min 30 sec" or "45 sec". */
 export function formatTotalDuration(secs: number): string {
-  if (secs <= 0) return '0 sec';
+  if (secs <= 0) return '0:00';
   const m = Math.floor(secs / 60);
   const s = secs % 60;
-  if (m === 0) return `${s} sec`;
-  if (s === 0) return `${m} min`;
-  return `${m} min ${s} sec`;
+  return `${m}:${s.toString().padStart(2, '0')}`;
 }

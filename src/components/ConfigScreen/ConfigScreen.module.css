@@ -1,58 +1,355 @@
+/* ── Root grid ─────────────────────────────────────── */
+
 .screen {
-  display: flex;
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  grid-template-rows: 1fr auto auto;
+  grid-template-areas:
+    'left right'
+    'history history'
+    'start start';
   width: 100%;
   height: 100%;
-  gap: 0;
+  gap: 1vmin;
+  padding: 1vmin;
+  background: var(--c-bg);
+  box-sizing: border-box;
 }
 
-.main {
-  flex: 1;
+/* ── Columns ────────────────────────────────────────── */
+
+.left {
+  grid-area: left;
   display: flex;
   flex-direction: column;
-  gap: clamp(1rem, 2.5vh, 2rem);
-  padding: clamp(1.25rem, 3vw, 3rem) clamp(1.25rem, 4vw, 4rem);
-  overflow-y: auto;
+  gap: 1vmin;
+  min-height: 0;
 }
 
-.titleRow {
+.right {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  gap: 1vmin;
+  min-height: 0;
+}
+
+/* ── Cards ──────────────────────────────────────────── */
+
+.card {
+  flex: 1;
+  background: var(--c-surface);
+  border-radius: 2vmin;
+  padding: 2vmin 2.5vmin;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 1.5px solid var(--c-border);
+}
+
+.cardHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  margin-bottom: 0.5vmin;
 }
 
-.title {
-  font-size: clamp(1.2rem, 3vw, 2rem);
+.cardTitle {
+  font-size: 2vmin;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--c-text-primary);
+}
+
+.cardIcon {
+  width: 2.5vmin;
+  height: 2.5vmin;
+  fill: var(--c-text-secondary);
+  opacity: 0.5;
+}
+
+/* ── Time row ───────────────────────────────────────── */
+
+.timeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2vmin;
+  flex: 1;
+}
+
+.stepBtn {
+  flex-shrink: 0;
+  width: 7vmin;
+  height: 7vmin;
+  background: var(--c-bg);
+  border: 1.5px solid var(--c-border);
+  border-radius: 1.5vmin;
+  color: var(--c-text-primary);
+  font-size: 4vmin;
   font-weight: 700;
-  color: var(--c-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s;
 }
 
-.exitFsBtn {
-  font-size: 0.85rem;
-  padding: 0.4rem 1rem;
-  opacity: 0.7;
+.stepBtn:active {
+  background: var(--c-border);
+}
+
+.timeDisplay {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.timeDisplayActive .timePart { color: var(--c-active); }
+.timeDisplayRest .timePart   { color: var(--c-rest); }
+
+.timePart {
+  font-size: 18vmin;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 1vmin;
+  transition: background 0.1s;
+}
+
+.timePart:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.timeColon {
+  font-size: 15vmin;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--c-text-dim);
+  line-height: 1;
+  margin: 0 0.5vmin;
+  padding-bottom: 1vmin;
+}
+
+/* ── Rounds value ───────────────────────────────────── */
+
+.roundsValue {
+  font-size: 11vmin;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--c-text-primary);
+  background: none;
+  border: none;
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 1vmin;
+  transition: background 0.1s;
+  line-height: 1;
+}
+
+.roundsValue:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ── 4 toggle cards ─────────────────────────────────── */
+
+.toggleGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1vmin;
+}
+
+.toggleCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1vmin;
+  padding: 2vmin 1vmin;
+  border-radius: 2vmin;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.toggleCard:active {
+  transform: scale(0.96);
+}
+
+.toggleCardOn {
+  background: var(--c-active);
+  color: var(--c-btn-primary-text);
+}
+
+.toggleCardOff {
+  background: var(--c-rest);
+  color: var(--c-btn-primary-text);
+}
+
+.toggleCardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggleCardIcon svg {
+  width: 5vmin;
+  height: 5vmin;
+  fill: currentColor;
+}
+
+.toggleCardLabel {
+  font-size: 1.6vmin;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Settings card (prep + fullscreen) ──────────────── */
+
+.settingsCard {
+  flex: 1;
+  background: var(--c-surface);
+  border-radius: 2vmin;
+  border: 1.5px solid var(--c-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0 2.5vmin;
+  min-height: 0;
+}
+
+.settingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2.2vmin;
+  color: var(--c-text-primary);
+  padding: 1.5vmin 0;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.settingRow:last-child {
+  border-bottom: none;
+}
+
+/* Full-width clickable row (button variant) */
+.settingRowBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2.2vmin;
+  color: var(--c-text-primary);
+  padding: 1.5vmin 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--c-border);
+  width: 100%;
+  cursor: pointer;
   transition: opacity 0.15s;
-  white-space: nowrap;
 }
 
-.exitFsBtn:hover {
-  opacity: 1;
+.settingRowBtn:last-child {
+  border-bottom: none;
 }
 
-.totalDuration {
-  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
-  color: var(--c-text-secondary);
+.settingRowBtn:hover {
+  opacity: 0.75;
 }
 
-.totalDuration strong {
+.settingLabel {
+  font-weight: 500;
+  font-size: 2.2vmin;
+}
+
+.fsIcon {
+  width: 3.5vmin;
+  height: 3.5vmin;
+  fill: var(--c-text-secondary);
+}
+
+/* Prep timer inline */
+.prepRow {
+  display: flex;
+  align-items: center;
+  gap: 1vmin;
+}
+
+.stepBtnSm {
+  width: 3.5vmin;
+  height: 3.5vmin;
+  background: var(--c-bg);
+  border: 1.5px solid var(--c-border);
+  border-radius: 0.8vmin;
   color: var(--c-text-primary);
+  font-size: 2vmin;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s;
+  flex-shrink: 0;
 }
+
+.stepBtnSm:active {
+  background: var(--c-border);
+}
+
+.prepValue {
+  font-size: 2.2vmin;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--c-text-primary);
+  background: var(--c-bg);
+  border: 1.5px solid var(--c-border);
+  border-radius: 0.8vmin;
+  padding: 0.2vmin 1vmin;
+  min-width: 4vmin;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.12s;
+}
+
+.prepValue:hover {
+  border-color: var(--c-text-secondary);
+}
+
+/* ── History strip ──────────────────────────────────── */
+
+.historyStrip {
+  grid-area: history;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Start button ───────────────────────────────────── */
 
 .startBtn {
-  align-self: flex-start;
-  font-size: clamp(1rem, 2vw, 1.3rem);
-  padding: clamp(0.6rem, 1.5vh, 0.9rem) clamp(2rem, 5vw, 4rem);
-  margin-top: 0.5rem;
+  grid-area: start;
+  width: 100%;
+  padding: 2vmin;
+  background: var(--c-btn-primary);
+  color: var(--c-btn-primary-text);
+  border-radius: 2vmin;
+  font-size: 3vmin;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
 }
 
 .startBtn:disabled {
@@ -60,12 +357,6 @@
   cursor: not-allowed;
 }
 
-.sidebar {
-  width: clamp(200px, 22vw, 340px);
-  border-left: 1px solid var(--c-border);
-  overflow-y: auto;
-  padding: clamp(1rem, 2.5vw, 2rem) clamp(0.75rem, 2vw, 1.5rem);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.startBtn:active:not(:disabled) {
+  opacity: 0.8;
 }
