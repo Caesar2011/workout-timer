@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 
 import { useAppContext } from '../../contexts/useAppContext';
 import { getTotalDuration, formatTotalDuration } from '../../logic/workout';
@@ -14,6 +14,15 @@ export function ConfigScreen() {
   const [activeSecs, setActiveSecs] = useState(30);
   const [restSecs, setRestSecs] = useState(10);
   const [rounds, setRounds] = useState(8);
+  const [isFullscreen, setIsFullscreen] = useState(
+    () => !!document.fullscreenElement,
+  );
+
+  useEffect(() => {
+    const handler = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', handler);
+    return () => document.removeEventListener('fullscreenchange', handler);
+  }, []);
 
   function loadConfig(cfg: WorkoutConfig) {
     setActiveSecs(cfg.activeSecs);
@@ -47,7 +56,17 @@ export function ConfigScreen() {
   return (
     <div class={styles.screen}>
       <div class={styles.main}>
-        <h1 class={styles.title}>Workout Timer</h1>
+        <div class={styles.titleRow}>
+          <h1 class={styles.title}>Workout Timer</h1>
+          {isFullscreen && (
+            <button
+              class={`pill-btn pill-btn--ghost ${styles.exitFsBtn}`}
+              onClick={() => document.exitFullscreen()}
+            >
+              ⛶ Exit Fullscreen
+            </button>
+          )}
+        </div>
         <WorkoutForm
           activeSecs={activeSecs}
           restSecs={restSecs}

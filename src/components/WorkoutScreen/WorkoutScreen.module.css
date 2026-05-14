@@ -1,25 +1,57 @@
 .screen {
   position: relative;
+  --screen-border: 2em;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--c-bg);
+  outline: var(--screen-border) solid var(--phase-color, var(--c-active));
+  outline-offset: calc(var(--screen-border) * -1 + 2px);
+  padding: var(--screen-border);
+  transition: outline-color 0.4s ease;
 }
 
-.backBtn {
+/* ── Corner info blocks ───────────────────────────── */
+
+.cornerTL {
   position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
-  font-size: 0.9rem;
-  opacity: 0.6;
-  transition: opacity 0.15s;
+  top: calc(var(--screen-border) + 1em);
+  left: calc(var(--screen-border) + 1em);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
 }
 
-.backBtn:hover {
-  opacity: 1;
+.cornerTR {
+  position: absolute;
+  top: calc(var(--screen-border) + 1em);
+  right: calc(var(--screen-border) + 1em);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2em;
 }
+
+.cornerLabel {
+  font-size: 2vmin;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  color: var(--c-text-secondary);
+  text-transform: uppercase;
+}
+
+.cornerValue {
+  font-size: 6vmin;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--c-text-primary);
+  line-height: 1;
+}
+
+/* ── Center ring + time ───────────────────────────── */
 
 .center {
   position: relative;
@@ -33,33 +65,42 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
   pointer-events: none;
 }
 
-.round {
-  font-size: 4vmin;
-  color: var(--c-text-secondary);
-  font-weight: 600;
-}
-
 .phaseTime {
-  font-size: 20vmin;
+  font-size: 26vmin;
   font-weight: 800;
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
-.totalTime {
-  font-size: 8vmin;
-  color: var(--c-text-secondary);
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
-}
-
 .doneText {
-  font-size: clamp(2.5rem, 8vmin, 6rem);
+  font-size: 26vmin;
   font-weight: 800;
   color: var(--c-active);
+}
+
+/* ── Back button ──────────────────────────────────── */
+
+.backBtn {
+  position: absolute;
+  bottom: calc(var(--screen-border) + 1em);
+  left: calc(var(--screen-border) + 1em);
+  font-size: 2vmin;
+  transition: opacity 0.4s ease;
+}
+
+.backVisible {
+  pointer-events: auto;
+}
+
+.backVisible:hover {
+  opacity: 1;
+}
+
+.backHidden {
+  opacity: 0;
+  pointer-events: none;
 }

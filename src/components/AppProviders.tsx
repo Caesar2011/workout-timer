@@ -34,10 +34,13 @@ export function AppProviders({
   function startWorkout(config: WorkoutConfig) {
     addToHistory(config);
     setActiveConfig(config);
+    // Enter fullscreen; ignore rejections (e.g. called outside user gesture in some browsers)
+    document.documentElement.requestFullscreen().catch(() => undefined);
   }
 
   function returnToConfig() {
     setActiveConfig(null);
+    // Stay in fullscreen — user exits via the config screen button
   }
 
   return (

@@ -12,10 +12,9 @@ interface Props {
 const SIZE = 500;
 const CX = SIZE / 2;
 const CY = SIZE / 2;
-const OUTER_R = 220;
-const INNER_R = 160;
+const OUTER_R = 205;
+const INNER_R = 190;
 
-/** Convert polar angle (degrees from top, clockwise) to SVG x/y. */
 function polarToXY(angleDeg: number, r: number): { x: number; y: number } {
   const rad = ((angleDeg - 90) * Math.PI) / 180;
   return { x: CX + r * Math.cos(rad), y: CY + r * Math.sin(rad) };
@@ -27,7 +26,6 @@ function arcPath(
   outerR: number,
   innerR: number,
 ): string {
-  // clamp to avoid degenerate arcs
   const sweep = Math.min(sweepAngle, 359.999);
   const largeArc = sweep > 180 ? 1 : 0;
   const endAngle = startAngle + sweep;
@@ -62,23 +60,19 @@ export function DonutRing({ segments, totalSecs, elapsedSecs, phase }: Props) {
         const color =
           seg.kind === 'active' ? 'var(--c-active)' : 'var(--c-rest)';
 
-        // Portion of this segment that is elapsed (fully dark)
         const elapsedInSeg = Math.max(
           0,
           Math.min(elapsedDeg - seg.startAngle, seg.sweepAngle),
         );
-        // Portion remaining (colored)
         const remainingStart = seg.startAngle + elapsedInSeg;
         const remainingSweep = seg.sweepAngle - elapsedInSeg;
 
         return (
           <g key={i}>
-            {/* Full segment background (dim) */}
             <path
               d={arcPath(seg.startAngle, seg.sweepAngle, OUTER_R, INNER_R)}
               fill="var(--c-done-seg)"
             />
-            {/* Remaining colored portion */}
             {remainingSweep > 0.1 && (
               <path
                 d={arcPath(remainingStart, remainingSweep, OUTER_R, INNER_R)}
@@ -86,7 +80,6 @@ export function DonutRing({ segments, totalSecs, elapsedSecs, phase }: Props) {
                 opacity={phase === 'done' ? 0.3 : 1}
               />
             )}
-            {/* Segment divider gap — thin dark line at boundaries */}
             <path
               d={arcPath(segEndAngle - 0.5, 1, OUTER_R + 2, INNER_R - 2)}
               fill="var(--c-bg)"
