@@ -30,6 +30,14 @@ export interface WorkoutState {
   phaseRemaining: number;
   totalElapsed: number;
   totalDuration: number;
+  /** Per-segment time overrides (e.g. +30s) */
+  segmentAdjustments: SegmentAdjustment[];
+}
+
+export interface SegmentAdjustment {
+  /** 0-based segment index in flattened round/phase sequence */
+  segmentIndex: number;
+  extraSecs: number;
 }
 
 export interface DonutSegment {

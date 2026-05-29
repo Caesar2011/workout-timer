@@ -19,7 +19,9 @@ export function HistoryList({ onSelect }: Props) {
         {history.map((cfg, i) => {
           const total = getTotalDuration(cfg);
           const fmtSecs = (s: number) => {
-            const m = Math.floor(s / 60).toString().padStart(2, '0');
+            const m = Math.floor(s / 60)
+              .toString()
+              .padStart(2, '0');
             const sec = (s % 60).toString().padStart(2, '0');
             return `${m}:${sec}`;
           };

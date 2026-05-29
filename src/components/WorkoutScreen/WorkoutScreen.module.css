@@ -82,25 +82,147 @@
   color: var(--c-active);
 }
 
-/* ── Back button ──────────────────────────────────── */
+/* ── Control panel ────────────────────────────────── */
 
-.backBtn {
+.controlsPanel {
   position: absolute;
   bottom: calc(var(--screen-border) + 1em);
   left: calc(var(--screen-border) + 1em);
-  font-size: 2vmin;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.8vmin;
+  padding: 1.2vmin 1.5vmin;
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: 2vmin;
   transition: opacity 0.4s ease;
 }
 
-.backVisible {
+.controlsVisible {
+  opacity: 1;
   pointer-events: auto;
 }
 
-.backVisible:hover {
-  opacity: 1;
-}
-
-.backHidden {
+.controlsHidden {
   opacity: 0;
   pointer-events: none;
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2vmin;
+  width: 100%;
+}
+
+.ctrlStretch {
+  flex: 1;
+}
+
+/* Navigation buttons (<<, >>) */
+.ctrlBtn {
+  flex-shrink: 0;
+  width: 6.5vmin;
+  height: 6.5vmin;
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: 1.5vmin;
+  color: var(--c-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.ctrlBtn:active {
+  background: var(--c-border);
+}
+
+.ctrlBtn svg {
+  width: 3.5vmin;
+  height: 3.5vmin;
+  fill: currentColor;
+}
+
+/* Primary action (play/pause) */
+.ctrlPrimary {
+  flex-shrink: 0;
+  width: 9vmin;
+  height: 9vmin;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    opacity 0.15s,
+    transform 0.1s;
+}
+
+.ctrlPrimary:active {
+  transform: scale(0.94);
+}
+
+.ctrlPrimary svg {
+  width: 5vmin;
+  height: 5vmin;
+  fill: currentColor;
+}
+
+.ctrlPlay {
+  background: var(--c-active);
+  color: var(--c-btn-primary-text);
+}
+
+.ctrlPause {
+  background: var(--c-rest);
+  color: var(--c-btn-primary-text);
+}
+
+/* Cancel button */
+.ctrlCancel {
+  flex-shrink: 0;
+  padding: 0.6vmin 2vmin;
+  height: 5vmin;
+  background: transparent;
+  border: 1.5px solid var(--c-rest);
+  border-radius: 1.2vmin;
+  color: var(--c-rest);
+  font-size: 2vmin;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.ctrlCancel:active {
+  background: var(--c-rest);
+  color: var(--c-btn-primary-text);
+}
+
+/* +30s button */
+.ctrlAdd {
+  flex-shrink: 0;
+  padding: 0.6vmin 1.5vmin;
+  height: 5vmin;
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: 1.2vmin;
+  color: var(--c-text-primary);
+  font-size: 2vmin;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.12s;
+  letter-spacing: 0.03em;
+}
+
+.ctrlAdd:active {
+  background: var(--c-border);
+}
+
+.ctrlAdd:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }

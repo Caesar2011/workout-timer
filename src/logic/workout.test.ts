@@ -56,12 +56,15 @@ describe('tick', () => {
 
 describe('getDonutSegments', () => {
   it('last round has no rest segment', () => {
-    const segs = getDonutSegments(cfg);
+    const segs = getDonutSegments(cfg, []);
     expect(segs[segs.length - 1].kind).toBe('active');
   });
 
   it('total sweep ≈ 360', () => {
-    const total = getDonutSegments(cfg).reduce((a, s) => a + s.sweepAngle, 0);
+    const total = getDonutSegments(cfg, []).reduce(
+      (a, s) => a + s.sweepAngle,
+      0,
+    );
     expect(total).toBeCloseTo(360);
   });
 });

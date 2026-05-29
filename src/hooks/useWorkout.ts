@@ -7,12 +7,24 @@ import {
   playRest,
   playStart,
 } from '../logic/sound';
-import { buildInitialWorkoutState, tick } from '../logic/workout';
+import {
+  add30 as add30Fn,
+  buildInitialWorkoutState,
+  forward as forwardFn,
+  rewind as rewindFn,
+  tick,
+} from '../logic/workout';
 import type { PhaseKind, WorkoutConfig, WorkoutState } from '../types';
 
 interface UseWorkoutReturn {
   state: WorkoutState;
   countdownRemaining: number | null;
+  paused: boolean;
+  pause: () => void;
+  resume: () => void;
+  rewind: () => void;
+  forward: () => void;
+  add30: () => void;
 }
 
 export function useWorkout(
@@ -25,10 +37,13 @@ export function useWorkout(
   const [state, setState] = useState<WorkoutState>(
     buildInitialWorkoutState(config),
   );
+  const [paused, setPaused] = useState(false);
 
   const prevPhaseRef = useRef<PhaseKind | null>(null);
   const soundRef = useRef(soundEnabled);
   soundRef.current = soundEnabled;
+  const pausedRef = useRef(paused);
+  pausedRef.current = paused;
 
   useEffect(() => {
     if (countdownRemaining === null) return;
@@ -42,7 +57,6 @@ export function useWorkout(
       return () => clearTimeout(id);
     }
 
-    // countdown hit 0 → start
     if (soundRef.current) playStart();
     setCountdownRemaining(null);
   }, [countdownRemaining]);
@@ -52,6 +66,8 @@ export function useWorkout(
     if (state.phase === 'done') return;
 
     const id = setInterval(() => {
+      if (pausedRef.current) return;
+
       setState((prev) => {
         const next = tick(prev, config);
 
@@ -68,10 +84,34 @@ export function useWorkout(
     return () => clearInterval(id);
   }, [countdownRemaining, state.phase, config]);
 
-  // fire sound on phase change (tracked separately to avoid double-fire)
   useEffect(() => {
     prevPhaseRef.current = state.phase;
   }, [state.phase]);
 
-  return { state, countdownRemaining };
+  function pause() {
+    setPaused(true);
+  }
+  function resume() {
+    setPaused(false);
+  }
+  function rewind() {
+    setState((prev) => rewindFn(prev, config));
+  }
+  function forward() {
+    setState((prev) => forwardFn(prev, config));
+  }
+  function add30() {
+    setState((prev) => add30Fn(prev, config));
+  }
+
+  return {
+    state,
+    countdownRemaining,
+    paused,
+    pause,
+    resume,
+    rewind,
+    forward,
+    add30,
+  };
 }

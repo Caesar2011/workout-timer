@@ -105,8 +105,12 @@
   justify-content: center;
 }
 
-.timeDisplayActive .timePart { color: var(--c-active); }
-.timeDisplayRest .timePart   { color: var(--c-rest); }
+.timeDisplayActive .timePart {
+  color: var(--c-active);
+}
+.timeDisplayRest .timePart {
+  color: var(--c-rest);
+}
 
 .timePart {
   font-size: 18vmin;
@@ -176,7 +180,9 @@
   border-radius: 2vmin;
   border: none;
   cursor: pointer;
-  transition: opacity 0.15s, transform 0.1s;
+  transition:
+    opacity 0.15s,
+    transform 0.1s;
 }
 
 .toggleCard:active {
